@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "494422079092",
+    "project_id": "trackexp-d1b6f",
+    "storage_bucket": "trackexp-d1b6f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:494422079092:android:aa3c95dcc28c1d075cc321",
+        "android_client_info": {
+          "package_name": "com.example.managment"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "494422079092-vlnbgnmosda24uhuh5mtkgjuhev4qveg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhE2pxo3pu_3F6p75uHk6ogRH23m2mL3g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "494422079092-vlnbgnmosda24uhuh5mtkgjuhev4qveg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "494422079092-vm69na91k9q8iofte2hsgi9hae95et54.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.managment"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
