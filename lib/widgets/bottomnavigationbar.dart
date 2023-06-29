@@ -3,6 +3,10 @@ import 'package:managment/Screens/add.dart';
 import 'package:managment/Screens/home.dart';
 import 'package:managment/Screens/statistics.dart';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:managment/net/flutterfire.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 class Bottom extends StatefulWidget {
   const Bottom({Key? key}) : super(key: key);
 

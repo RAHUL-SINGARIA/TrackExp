@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:managment/Screens/home.dart';
-import 'package:managment/Screens/statistics.dart';
-import 'package:managment/widgets/bottomnavigationbar.dart';
+import 'package:managment/Screens/login_screen.dart';
+
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:flutter/widgets.dart';
 import 'data/model/add_date.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
-// void main() async {
-//   await Hive.initFlutter();
-//   Hive.registerAdapter(AdddataAdapter());
-//   await Hive.openBox<Add_data>('data');
-//   runApp(const MyApp());
-// }
+import 'package:managment/pallete.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  await Hive.initFlutter();
+
+  await Hive.openBox<Add_data>('data');
+
   runApp(const MyApp());
 }
 
@@ -27,8 +28,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: Pallete.backgroundColor,
+      ),
       debugShowCheckedModeBanner: false,
-      home: Bottom(),
+      home: LoginScreen(),
     );
   }
 }
