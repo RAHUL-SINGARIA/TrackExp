@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:managment/pallete.dart';
 
-class GradientButtonSignUp extends StatelessWidget {
+class GradientButtonSignUp extends StatefulWidget {
   const GradientButtonSignUp({Key? key}) : super(key: key);
 
+  @override
+  State<GradientButtonSignUp> createState() => _GradientButtonSignUpState();
+}
+
+class _GradientButtonSignUpState extends State<GradientButtonSignUp> {
   @override
   Widget build(BuildContext context) {
     return Container(
