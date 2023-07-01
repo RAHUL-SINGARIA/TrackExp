@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:managment/Screens/sign_up.dart';
 import 'package:managment/net/flutterfire.dart';
 import 'package:managment/pallete.dart';
@@ -6,7 +7,7 @@ import 'package:managment/widgets/bottomnavigationbar.dart';
 
 import 'package:flutter/material.dart';
 
-import 'package:managment/widgets/social_button.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -18,6 +19,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController _emailField = TextEditingController();
   TextEditingController _passwordField = TextEditingController();
+  bool _isSigningIn = false;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -35,9 +37,53 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               const SizedBox(height: 50),
-              const SocialButton(
-                  iconPath: 'assets/svgs/g_logo.svg',
-                  label: 'Continue with Google'),
+              // const SocialButton(
+              //     iconPath: 'assets/svgs/g_logo.svg',
+              //     label: 'Continue with Google'),
+              TextButton.icon(
+                onPressed: () async {
+                  setState(() {
+                    _isSigningIn = true;
+                  });
+
+                  User? user =
+                      await Authentication.signInWithGoogle(context: context);
+
+                  setState(() {
+                    _isSigningIn = false;
+                  });
+
+                  if (user != null) {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => Bottom(),
+                      ),
+                    );
+                  }
+                },
+                icon: SvgPicture.asset(
+                  'assets/svgs/g_logo.svg',
+                  width: 25,
+                  color: Color.fromARGB(255, 0, 0, 0),
+                ),
+                label: Text(
+                  'Continue with Google',
+                  style: const TextStyle(
+                    color: Color.fromARGB(255, 0, 0, 0),
+                    fontSize: 17,
+                  ),
+                ),
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.symmetric(vertical: 30, horizontal: 100),
+                  shape: RoundedRectangleBorder(
+                    side: const BorderSide(
+                      color: Pallete.borderColor,
+                      width: 3,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
 
               const SizedBox(height: 15),
               const Text(
