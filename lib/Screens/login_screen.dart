@@ -28,9 +28,9 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Center(
           child: Column(
             children: [
-              Image.asset('assets/images/money-laws-scales.jpg'),
+              Image.asset('assets/images/signin_balls.png'),
               const Text(
-                'Sign in.',
+                'Welcome!',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 50,
