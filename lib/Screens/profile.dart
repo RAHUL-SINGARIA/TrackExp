@@ -40,17 +40,17 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: Color.fromARGB(255, 47, 125, 121),
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.blue,
+        backgroundColor: Color.fromARGB(255, 47, 125, 121),
       ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(
             left: 16.0,
             right: 16.0,
-            bottom: 20.0,
+            bottom: 5000.0,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -62,7 +62,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Icon(
-                      Icons.person,
+                      Icons.person_3_sharp,
                       size: 60,
                       color: const Color.fromARGB(255, 216, 215, 215),
                     ),

@@ -28,7 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Center(
           child: Column(
             children: [
-              Image.asset('assets/images/signin_balls.png'),
+              Image.asset('assets/images/money-laws-scales.jpg'),
               const Text(
                 'Sign in.',
                 style: TextStyle(
@@ -64,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 icon: SvgPicture.asset(
                   'assets/svgs/g_logo.svg',
                   width: 25,
-                  color: Color.fromARGB(255, 0, 0, 0),
+                  color: Color.fromARGB(255, 185, 65, 65),
                 ),
                 label: Text(
                   'Continue with Google',
@@ -114,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    hintText: 'Login',
+                    hintText: 'Email_id',
                   ),
                 ),
               ),
@@ -150,9 +150,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 decoration: BoxDecoration(
                   gradient: const LinearGradient(
                     colors: [
-                      Pallete.gradient1,
-                      Pallete.gradient2,
-                      Pallete.gradient3,
+                      Color.fromARGB(255, 4, 80, 51),
+                      Color.fromARGB(255, 72, 163, 117),
+                      Color.fromARGB(255, 7, 80, 48),
                     ],
                     begin: Alignment.bottomLeft,
                     end: Alignment.topRight,
@@ -197,7 +197,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     const Text(
                       'Don\'t have an account ? ',
                       style: TextStyle(
-                          fontSize: 13,
+                          fontSize: 15,
                           color: Color(0xff939393),
                           fontWeight: FontWeight.bold),
                     ),
@@ -211,8 +211,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: const Text(
                         'Sign-up',
                         style: TextStyle(
-                            fontSize: 15,
-                            color: Color(0xff748288),
+                            fontSize: 18,
+                            color: Color.fromARGB(255, 24, 28, 30),
                             fontWeight: FontWeight.bold),
                       ),
                     ),
