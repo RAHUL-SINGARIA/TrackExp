@@ -169,7 +169,7 @@ class _HomeState extends State<Home> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Hello',
+                          'Greetings',
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 16,
