@@ -84,7 +84,7 @@ class _SignupPageState extends State<SignupPage> {
                       ),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    hintText: 'Login',
+                    hintText: 'Email id',
                   ),
                 ),
               ),
@@ -94,6 +94,7 @@ class _SignupPageState extends State<SignupPage> {
                 width: 400,
                 child: TextFormField(
                   controller: _passwordField,
+                  obscureText: true,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.all(27),
                     enabledBorder: OutlineInputBorder(
@@ -120,9 +121,9 @@ class _SignupPageState extends State<SignupPage> {
                 decoration: BoxDecoration(
                   gradient: const LinearGradient(
                     colors: [
-                      Pallete.gradient1,
-                      Pallete.gradient2,
-                      Pallete.gradient3,
+                      Color.fromARGB(255, 4, 80, 51),
+                      Color.fromARGB(255, 72, 163, 117),
+                      Color.fromARGB(255, 7, 80, 48),
                     ],
                     begin: Alignment.bottomLeft,
                     end: Alignment.topRight,
@@ -131,13 +132,14 @@ class _SignupPageState extends State<SignupPage> {
                 ),
                 child: ElevatedButton(
                   onPressed: () async {
-                    bool shouldNavigate =
-                        await register(_emailField.text, _passwordField.text);
-                    if (shouldNavigate) {
+                    UserRegistrationResult? registrationResult = await register(
+                        _nameField.text, _emailField.text, _passwordField.text);
+                    if (registrationResult != null) {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Bottom(),
+                          builder: (context) =>
+                              Bottom(user: registrationResult.user),
                         ),
                       );
                     }

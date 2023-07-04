@@ -6,39 +6,56 @@ import 'package:managment/widgets/bottomnavigationbar.dart';
 
 import 'package:flutter/foundation.dart' show kIsWeb;
 
-Future<bool> signIn(String emailAddress, String password) async {
+Future<User?> signIn(String emailAddress, String password) async {
   try {
     final credential = await FirebaseAuth.instance
         .signInWithEmailAndPassword(email: emailAddress, password: password);
-    return true;
+    return credential.user;
   } on FirebaseAuthException catch (e) {
     if (e.code == 'user-not-found') {
       print('No user found for that email.');
     } else if (e.code == 'wrong-password') {
       print('Wrong password provided for that user.');
     }
-    return false;
+    return null;
   }
 }
 
-Future<bool> register(String emailAddress, String password) async {
+class UserRegistrationResult {
+  final User user;
+
+  UserRegistrationResult(this.user);
+}
+
+Future<UserRegistrationResult?> register(
+    String name, String emailAddress, String password) async {
   try {
     final credential =
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
       email: emailAddress,
       password: password,
     );
-    return true;
+    final User? user = credential.user;
+    if (user != null) {
+      await user.updateDisplayName(name);
+
+      await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+        'name': name,
+      });
+
+      return UserRegistrationResult(user);
+    }
+    return null;
   } on FirebaseAuthException catch (e) {
     if (e.code == 'weak-password') {
       print('The password provided is too weak.');
     } else if (e.code == 'email-already-in-use') {
       print('The account already exists for that email.');
     }
-    return false;
+    return null;
   } catch (e) {
     print(e);
-    return false;
+    return null;
   }
 }
 

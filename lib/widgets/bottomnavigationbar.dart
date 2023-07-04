@@ -9,15 +9,37 @@ import 'package:managment/net/flutterfire.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class Bottom extends StatefulWidget {
-  const Bottom({Key? key}) : super(key: key);
+  const Bottom({Key? key, required User user})
+      : _user = user,
+        super(key: key);
 
+  final User _user;
   @override
   State<Bottom> createState() => _BottomState();
 }
 
 class _BottomState extends State<Bottom> {
+  late User _user;
   int index_color = 0;
-  List Screen = [Home(), Statistics(), Home(), UserInfoScreen()];
+
+  late List<Widget> Screen;
+
+  @override
+  void initState() {
+    super.initState();
+    _user = widget._user;
+    Screen = [
+      Home(
+        user: _user,
+      ),
+      Statistics(),
+      Home(
+        user: _user,
+      ),
+      UserInfoScreen(user: _user)
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

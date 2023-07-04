@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:managment/Screens/login_screen.dart';
 
@@ -22,12 +23,6 @@ void main() async {
 
   runApp(const MyApp());
 }
-// void main() async {
-//   await Hive.initFlutter();
-//   Hive.registerAdapter(AdddataAdapter());
-//   await Hive.openBox<Add_data>('data');
-//   runApp(const MyApp());
-// }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -36,7 +31,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            User user = snapshot.data as User; // Cast the data to User object
+            return Bottom(user: user); // Pass the user object to Bottom widget
+          } else {
+            return LoginScreen();
+          }
+        },
+      ),
     );
   }
 }

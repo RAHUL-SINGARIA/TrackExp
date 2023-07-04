@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -6,7 +7,11 @@ import 'package:managment/data/model/add_date.dart';
 import 'package:managment/data/utlity.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  const Home({Key? key, required User user})
+      : _user = user,
+        super(key: key);
+
+  final User _user;
 
   @override
   State<Home> createState() => _HomeState();
@@ -14,6 +19,14 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   var history;
+  late User _user;
+  @override
+  void initState() {
+    super.initState();
+    _user = widget
+        ._user; // Assign the user value from the constructor to the _user field
+  }
+
   final box = Hive.box<Add_data>('data');
   final List<String> day = [
     'Monday',
@@ -156,7 +169,7 @@ class _HomeState extends State<Home> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Good afternoon',
+                          'Hello',
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 16,
@@ -164,7 +177,7 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                         Text(
-                          'Abhijeet Kushwaha',
+                          _user.displayName!,
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 20,

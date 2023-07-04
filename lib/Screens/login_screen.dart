@@ -56,7 +56,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   if (user != null) {
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
-                        builder: (context) => Bottom(),
+                        builder: (context) => Bottom(
+                          user: user,
+                        ),
                       ),
                     );
                   }
@@ -114,7 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    hintText: 'Email_id',
+                    hintText: 'Email id',
                   ),
                 ),
               ),
@@ -124,6 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 width: 400,
                 child: TextFormField(
                   controller: _passwordField,
+                  obscureText: true,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.all(27),
                     enabledBorder: OutlineInputBorder(
@@ -161,13 +164,15 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 child: ElevatedButton(
                   onPressed: () async {
-                    bool shouldNavigate =
+                    User? user =
                         await signIn(_emailField.text, _passwordField.text);
-                    if (shouldNavigate) {
+                    if (user != null) {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Bottom(),
+                          builder: (context) => Bottom(
+                            user: user,
+                          ),
                         ),
                       );
                     }

@@ -4,7 +4,11 @@ import 'package:managment/Screens/login_screen.dart';
 import 'package:managment/net/flutterfire.dart';
 
 class UserInfoScreen extends StatefulWidget {
-  const UserInfoScreen({Key? key}) : super(key: key);
+  const UserInfoScreen({Key? key, required User user})
+      : _user = user,
+        super(key: key);
+
+  final User _user;
 
   @override
   _UserInfoScreenState createState() => _UserInfoScreenState();
@@ -12,6 +16,13 @@ class UserInfoScreen extends StatefulWidget {
 
 class _UserInfoScreenState extends State<UserInfoScreen> {
   bool _isSigningOut = false;
+  late User _user;
+  @override
+  void initState() {
+    super.initState();
+    _user = widget
+        ._user; // Assign the user value from the constructor to the _user field
+  }
 
   Route _routeToSignInScreen() {
     return PageRouteBuilder(
@@ -30,11 +41,6 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
         );
       },
     );
-  }
-
-  @override
-  void initState() {
-    super.initState();
   }
 
   Widget build(BuildContext context) {
@@ -75,7 +81,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                             height: _height / 30,
                           ),
                           new Text(
-                            'Abhijeet Kushwaha',
+                            _user.displayName!,
                             style: new TextStyle(
                                 fontSize: 18.0,
                                 color: Colors.white,
@@ -123,7 +129,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                           child: new Column(
                             children: <Widget>[
                               infoChild(
-                                  _width, Icons.email, 'Abhijeet108@gmail.com'),
+                                  _width, Icons.email, ' ${_user.email!}'),
                               infoChild(_width, Icons.call, '+12-1234567890'),
                               infoChild(
                                   _width, Icons.group_add, 'Add to group'),
