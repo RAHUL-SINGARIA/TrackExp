@@ -1,6 +1,23 @@
+// import 'package:hive_flutter/hive_flutter.dart';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:managment/data/model/add_date.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+// import 'package:managment/data/model/add_date.dart';
+
+User? user = FirebaseAuth.instance.currentUser;
+String? userID = user?.uid;
+
+class Add_data {
+  String? selectedItemi;
+  String? amount;
+  DateTime? date;
+  String? explain;
+  String? selectedItem;
+
+  Add_data(this.selectedItemi, this.amount, this.date, this.explain,
+      this.selectedItem);
+}
 
 class Add_Screen extends StatefulWidget {
   const Add_Screen({super.key});
@@ -10,7 +27,7 @@ class Add_Screen extends StatefulWidget {
 }
 
 class _Add_ScreenState extends State<Add_Screen> {
-  final box = Hive.box<Add_data>('data');
+  // final box = Hive.box<Add_data>('data');
   DateTime date = new DateTime.now();
   String? selctedItem;
   String? selctedItemi;
@@ -88,11 +105,32 @@ class _Add_ScreenState extends State<Add_Screen> {
 
   GestureDetector save() {
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
         var add = Add_data(
             selctedItemi!, amount_c.text, date, expalin_C.text, selctedItem!);
-        box.add(add);
-        Navigator.of(context).pop();
+        // box.add(add);
+        // Navigator.of(context).pop();
+        try {
+          // Save data to Firestore
+          await FirebaseFirestore.instance
+              .collection('users')
+              .doc(userID)
+              .collection('transaction')
+              .add({
+            'selectedItemi': add.selectedItemi,
+            'amount': add.amount,
+            'date': add.date,
+            'explain': add.explain,
+            'selectedItem': add.selectedItem,
+          });
+
+          // Data saved successfully
+          Navigator.of(context).pop();
+        } catch (error) {
+          // Error occurred while saving data
+          print('Error saving data: $error');
+          // Show an error dialog or handle the error as needed
+        }
       },
       child: Container(
         alignment: Alignment.center,
