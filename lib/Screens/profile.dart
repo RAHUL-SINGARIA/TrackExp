@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:managment/Screens/login_screen.dart';
+import 'package:managment/data/utlity.dart';
 import 'package:managment/net/flutterfire.dart';
 
 class UserInfoScreen extends StatefulWidget {
@@ -118,9 +119,9 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                             child: new Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
-                                  headerChild('Income', 10000000),
-                                  headerChild('Expense', 5000000),
-                                  headerChild('Balance', 5000000),
+                                  headerChild('Income', '\$ ${income()}'),
+                                  headerChild('Expense', '\$ ${expenses()}'),
+                                  headerChild('Balance', '\$ ${total()}'),
                                 ]),
                           ),
                         ),
@@ -195,7 +196,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
     );
   }
 
-  Widget headerChild(String header, int value) => new Expanded(
+  Widget headerChild(String header, String value) => new Expanded(
           child: new Column(
         children: <Widget>[
           new Text(header),
@@ -203,7 +204,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
             height: 8.0,
           ),
           new Text(
-            '$value',
+            value,
             style: new TextStyle(
                 fontSize: 14.0,
                 color: const Color(0xFF26CBE6),
